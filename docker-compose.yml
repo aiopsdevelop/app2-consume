@@ -1,0 +1,32 @@
+version: '3.4'
+    
+services:
+  
+  app2:
+    stdin_open: true
+    tty: true
+    container_name: "application_api2_consume"
+    build:
+      context: ./
+    entrypoint: ["./wait.sh", "30", "dotnet", "core6.dll"]
+    environment:
+      RabbitMq__Host: hybridlog.io
+      App3UriEndpoint: http://172.16.58.71:5001
+      IMAGE: registry.kube.io/projects/645/application_api2_consume:v1
+      BRANCH: develop
+      SERVICE_NAMESPACE: devops
+      OS_VERSION: 2010
+      CRM_KEY: HW-511
+      OS_NAME: windows
+      SUBDOMAIN: application_api2_consume.localhost
+      HOST_TYPE: arm64
+      PROJECT_NAME: application_api2_consume
+      PROJECT_VERSION: v1
+      HOST_ID: localhostId
+      HOST_NAME: localhost
+      TEMPLATE_NAME: dotnetcore6
+      JIRA_PROJECT_ID: 645
+      STAGE: production
+      TEAM_NAME: logic
+    extra_hosts:
+      - "hybridlog.io:192.168.30.177"
